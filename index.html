@@ -179,6 +179,12 @@
     .testi-dot { width:8px; height:8px; border-radius:50%; background:rgba(196,112,74,0.25); cursor:pointer; transition:background .2s,transform .2s; }
     .testi-dot.active { background:var(--terra); transform:scale(1.3); }
 
+    /* TESTI VIDEO */
+    .testi-video-wrap { position:relative; width:100%; background:#1a0305; aspect-ratio:9/16; overflow:hidden; }
+    .testi-video { width:100%; height:100%; object-fit:cover; display:block; }
+    .testi-play-btn { position:absolute; inset:0; width:100%; height:100%; background:rgba(0,0,0,0.25); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:opacity .2s; }
+    .testi-play-btn svg { width:52px; height:52px; background:rgba(196,112,74,0.9); border-radius:50%; padding:12px; }
+
     /* COMPARE */
     .compare { background:var(--cream); padding:72px 20px; }
     .compare-inner { max-width:900px; margin:0 auto; text-align:center; }
@@ -651,55 +657,76 @@
 <!-- TESTIMONIALS -->
 <section class="testi">
   <h2>Here's Why Participants Call It Life-Changing</h2>
-  <p class="testi-sub">Real people. Real transformations. Real photos from our sessions.</p>
+  <p class="testi-sub">Real people. Real voices. Watch what they experienced.</p>
   <div class="testi-scroller-wrap">
     <button class="testi-arrow testi-arrow-left" onclick="scrollTesti(-1)" aria-label="Previous">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
     <div class="testi-scroller" id="testiScroller">
       <div class="testi-card">
-        <img class="testi-img" src="assets/testi-1.jpg" alt="Workshop participants holding heart paintings">
+        <div class="testi-video-wrap">
+          <video class="testi-video" src="assets/testi-vid-1.mp4" playsinline preload="metadata" loop></video>
+          <button class="testi-play-btn" onclick="toggleVideo(this)"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+        </div>
         <div class="testi-body">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"I feel emotionally lighter, calmer, and more connected to myself. I didn't expect one session to do so much."</p>
-          <div class="testi-name">Workshop Participant</div>
-          <div class="testi-role">Mumbai</div>
+          <p class="testi-quote">"I feel emotionally lighter, calmer, and more connected to myself."</p>
+          <div class="testi-name">Workshop Participant · Mumbai</div>
         </div>
       </div>
       <div class="testi-card">
-        <img class="testi-img" src="assets/testi-2.jpg" alt="Group of women holding their artwork">
+        <div class="testi-video-wrap">
+          <video class="testi-video" src="assets/testi-vid-2.mp4" playsinline preload="metadata" loop></video>
+          <button class="testi-play-btn" onclick="toggleVideo(this)"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+        </div>
         <div class="testi-body">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"This program gave me a safe space to feel without being judged. I've been carrying so much — and for the first time, I let it go."</p>
-          <div class="testi-name">Housewife</div>
-          <div class="testi-role">Mumbai</div>
+          <p class="testi-quote">"This gave me a safe space to feel without being judged."</p>
+          <div class="testi-name">Housewife · Mumbai</div>
         </div>
       </div>
       <div class="testi-card">
-        <img class="testi-img" src="assets/testi-3.jpg" alt="Young participants with mandala artwork">
+        <div class="testi-video-wrap">
+          <video class="testi-video" src="assets/testi-vid-3.mp4" playsinline preload="metadata" loop></video>
+          <button class="testi-play-btn" onclick="toggleVideo(this)"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+        </div>
         <div class="testi-body">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"I discovered parts of myself I had forgotten. The activities were so engaging I completely lost track of time."</p>
-          <div class="testi-name">Working Professional</div>
-          <div class="testi-role">Mumbai</div>
+          <p class="testi-quote">"I discovered parts of myself I had forgotten or ignored."</p>
+          <div class="testi-name">Working Professional · Mumbai</div>
         </div>
       </div>
       <div class="testi-card">
-        <img class="testi-img" src="assets/testi-4.jpg" alt="Shruti with participant receiving certificate">
+        <div class="testi-video-wrap">
+          <video class="testi-video" src="assets/testi-vid-4.mp4" playsinline preload="metadata" loop></video>
+          <button class="testi-play-btn" onclick="toggleVideo(this)"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+        </div>
         <div class="testi-body">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"I never got a chance to think about myself so deeply. It was a very different feeling — I felt nostalgic touching colors again."</p>
-          <div class="testi-name">Homemaker</div>
-          <div class="testi-role">Mumbai</div>
+          <p class="testi-quote">"I never got a chance to think about myself so deeply before."</p>
+          <div class="testi-name">Homemaker · Mumbai</div>
         </div>
       </div>
       <div class="testi-card">
-        <img class="testi-img" src="assets/testi-1.jpg" alt="Art therapy session group">
+        <div class="testi-video-wrap">
+          <video class="testi-video" src="assets/testi-vid-5.mp4" playsinline preload="metadata" loop></video>
+          <button class="testi-play-btn" onclick="toggleVideo(this)"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+        </div>
         <div class="testi-body">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"I came in sceptical and left in tears — happy tears. I finally understood why I'd been feeling stuck for so long."</p>
-          <div class="testi-name">Working Professional</div>
-          <div class="testi-role">Delhi</div>
+          <p class="testi-quote">"I came in sceptical and left in tears — happy tears."</p>
+          <div class="testi-name">Working Professional · Delhi</div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-video-wrap">
+          <video class="testi-video" src="assets/testi-vid-6.mp4" playsinline preload="metadata" loop></video>
+          <button class="testi-play-btn" onclick="toggleVideo(this)"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+        </div>
+        <div class="testi-body">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"The activities were so engaging I completely lost track of time."</p>
+          <div class="testi-name">Participant · Mumbai</div>
         </div>
       </div>
     </div>
@@ -722,6 +749,13 @@
     s.addEventListener('mouseup',function(){isDown=false;s.classList.remove('dragging');});
     s.addEventListener('mousemove',function(e){if(!isDown)return;e.preventDefault();var x=e.pageX-s.offsetLeft;s.scrollLeft=scrollLeft-(x-startX)*1.5;});
     window.scrollTesti=function(dir){s.scrollBy({left:dir*cardW,behavior:'smooth'});};
+    window.toggleVideo=function(btn){
+      var v=btn.previousElementSibling;
+      if(v.paused){
+        document.querySelectorAll('.testi-video').forEach(function(x){x.pause(); x.nextElementSibling.style.opacity='1';});
+        v.play(); btn.style.opacity='0';
+      } else { v.pause(); btn.style.opacity='1'; }
+    };
   })();
   </script>
   <br>
