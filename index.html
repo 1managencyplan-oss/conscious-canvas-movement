@@ -593,44 +593,76 @@
 
 <div class="paint-divider"></div>
 
-<!-- MINI PHOTO TESTIMONIALS -->
-<div class="mini-testi-wrap">
-  <p class="mini-testi-label">What our participants experienced ↓</p>
-  <div class="mini-testi-row">
-    <div class="mini-testi-card">
-      <img src="assets/testi-1.jpg" alt="Testimonial"/>
-      <div class="mini-testi-body">
-        <div class="mini-stars">★★★★★</div>
-        <p>"I feel emotionally lighter and more connected to myself."</p>
-        <span>Workshop Participant · Mumbai</span>
+<!-- PHOTO TESTIMONIALS -->
+<section class="testi">
+  <h2>Here's Why Participants Call It Life-Changing</h2>
+  <p class="testi-sub">Real people. Real transformations. Real photos from our sessions.</p>
+  <div class="testi-scroller-wrap">
+    <button class="testi-arrow testi-arrow-left" onclick="scrollTesti(-1)" aria-label="Previous">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="testi-scroller" id="testiScroller">
+      <div class="testi-card">
+        <img class="testi-img" src="assets/testi-1.jpg" alt="Workshop participants holding heart paintings">
+        <div class="testi-body">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"I feel emotionally lighter, calmer, and more connected to myself. I didn't expect one session to do so much."</p>
+          <div class="testi-name">Workshop Participant</div>
+          <div class="testi-role">Mumbai</div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <img class="testi-img" src="assets/testi-2.jpg" alt="Group of women holding their artwork">
+        <div class="testi-body">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"This program gave me a safe space to feel without being judged. I've been carrying so much — and for the first time, I let it go."</p>
+          <div class="testi-name">Housewife</div>
+          <div class="testi-role">Mumbai</div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <img class="testi-img" src="assets/testi-3.jpg" alt="Young participants with mandala artwork">
+        <div class="testi-body">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"I discovered parts of myself I had forgotten. The activities were so engaging I completely lost track of time."</p>
+          <div class="testi-name">Working Professional</div>
+          <div class="testi-role">Mumbai</div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <img class="testi-img" src="assets/testi-4.jpg" alt="Shruti with participant receiving certificate">
+        <div class="testi-body">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"I never got a chance to think about myself so deeply. It was a very different feeling — I felt nostalgic touching colors again."</p>
+          <div class="testi-name">Homemaker</div>
+          <div class="testi-role">Mumbai</div>
+        </div>
       </div>
     </div>
-    <div class="mini-testi-card">
-      <img src="assets/testi-2.jpg" alt="Testimonial"/>
-      <div class="mini-testi-body">
-        <div class="mini-stars">★★★★★</div>
-        <p>"A safe space to feel without being judged."</p>
-        <span>Housewife · Mumbai</span>
-      </div>
-    </div>
-    <div class="mini-testi-card">
-      <img src="assets/testi-3.jpg" alt="Testimonial"/>
-      <div class="mini-testi-body">
-        <div class="mini-stars">★★★★★</div>
-        <p>"I discovered parts of myself I had forgotten."</p>
-        <span>Working Professional · Mumbai</span>
-      </div>
-    </div>
-    <div class="mini-testi-card">
-      <img src="assets/testi-4.jpg" alt="Testimonial"/>
-      <div class="mini-testi-body">
-        <div class="mini-stars">★★★★★</div>
-        <p>"Never got a chance to think about myself so deeply."</p>
-        <span>Homemaker · Mumbai</span>
-      </div>
-    </div>
+    <button class="testi-arrow testi-arrow-right" onclick="scrollTesti(1)" aria-label="Next">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
   </div>
-</div>
+  <div class="testi-dots" id="testiDots"></div>
+  <script>
+  (function(){
+    var s=document.getElementById('testiScroller'), cardW=322;
+    var dots=document.getElementById('testiDots');
+    var cards=s.querySelectorAll('.testi-card');
+    cards.forEach(function(_,i){ var d=document.createElement('div'); d.className='testi-dot'+(i===0?' active':''); d.onclick=function(){s.scrollTo({left:i*cardW,behavior:'smooth'});}; dots.appendChild(d); });
+    function updateDots(){ var idx=Math.round(s.scrollLeft/cardW); dots.querySelectorAll('.testi-dot').forEach(function(d,i){d.classList.toggle('active',i===idx);}); }
+    s.addEventListener('scroll',updateDots);
+    var isDown=false,startX,scrollLeft;
+    s.addEventListener('mousedown',function(e){isDown=true;s.classList.add('dragging');startX=e.pageX-s.offsetLeft;scrollLeft=s.scrollLeft;});
+    s.addEventListener('mouseleave',function(){isDown=false;s.classList.remove('dragging');});
+    s.addEventListener('mouseup',function(){isDown=false;s.classList.remove('dragging');});
+    s.addEventListener('mousemove',function(e){if(!isDown)return;e.preventDefault();var x=e.pageX-s.offsetLeft;s.scrollLeft=scrollLeft-(x-startX)*1.5;});
+    window.scrollTesti=function(dir){s.scrollBy({left:dir*cardW,behavior:'smooth'});};
+  })();
+  </script>
+  <br>
+  <a href="#final-cta" class="cta-big" style="max-width:600px;margin:28px auto 0;">🎨 I Want to Feel This Too — Only ₹99<small>Reserve Your Seat · 12th July 2026</small></a>
+</section>
 
 <div class="paint-divider"></div>
 
@@ -757,79 +789,6 @@
       <p>Printable mandala designs for stress relief, focus, and mindfulness practice — use them whenever you need to slow down and breathe.</p>
     </div>
   </div>
-</section>
-
-<div class="paint-divider"></div>
-
-<!-- PHOTO TESTIMONIALS -->
-<section class="testi">
-  <h2>Here's Why Participants Call It Life-Changing</h2>
-  <p class="testi-sub">Real people. Real transformations. Real photos from our sessions.</p>
-  <div class="testi-scroller-wrap">
-    <button class="testi-arrow testi-arrow-left" onclick="scrollTesti(-1)" aria-label="Previous">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <div class="testi-scroller" id="testiScroller">
-      <div class="testi-card">
-        <img class="testi-img" src="assets/testi-1.jpg" alt="Workshop participants holding heart paintings">
-        <div class="testi-body">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"I feel emotionally lighter, calmer, and more connected to myself. I didn't expect one session to do so much."</p>
-          <div class="testi-name">Workshop Participant</div>
-          <div class="testi-role">Mumbai</div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <img class="testi-img" src="assets/testi-2.jpg" alt="Group of women holding their artwork">
-        <div class="testi-body">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"This program gave me a safe space to feel without being judged. I've been carrying so much — and for the first time, I let it go."</p>
-          <div class="testi-name">Housewife</div>
-          <div class="testi-role">Mumbai</div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <img class="testi-img" src="assets/testi-3.jpg" alt="Young participants with mandala artwork">
-        <div class="testi-body">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"I discovered parts of myself I had forgotten. The activities were so engaging I completely lost track of time."</p>
-          <div class="testi-name">Working Professional</div>
-          <div class="testi-role">Mumbai</div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <img class="testi-img" src="assets/testi-4.jpg" alt="Shruti with participant receiving certificate">
-        <div class="testi-body">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-quote">"I never got a chance to think about myself so deeply. It was a very different feeling — I felt nostalgic touching colors again."</p>
-          <div class="testi-name">Homemaker</div>
-          <div class="testi-role">Mumbai</div>
-        </div>
-      </div>
-    </div>
-    <button class="testi-arrow testi-arrow-right" onclick="scrollTesti(1)" aria-label="Next">
-      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-  <div class="testi-dots" id="testiDots"></div>
-  <script>
-  (function(){
-    var s=document.getElementById('testiScroller'), cardW=322;
-    var dots=document.getElementById('testiDots');
-    var cards=s.querySelectorAll('.testi-card');
-    cards.forEach(function(_,i){ var d=document.createElement('div'); d.className='testi-dot'+(i===0?' active':''); d.onclick=function(){s.scrollTo({left:i*cardW,behavior:'smooth'});}; dots.appendChild(d); });
-    function updateDots(){ var idx=Math.round(s.scrollLeft/cardW); dots.querySelectorAll('.testi-dot').forEach(function(d,i){d.classList.toggle('active',i===idx);}); }
-    s.addEventListener('scroll',updateDots);
-    var isDown=false,startX,scrollLeft;
-    s.addEventListener('mousedown',function(e){isDown=true;s.classList.add('dragging');startX=e.pageX-s.offsetLeft;scrollLeft=s.scrollLeft;});
-    s.addEventListener('mouseleave',function(){isDown=false;s.classList.remove('dragging');});
-    s.addEventListener('mouseup',function(){isDown=false;s.classList.remove('dragging');});
-    s.addEventListener('mousemove',function(e){if(!isDown)return;e.preventDefault();var x=e.pageX-s.offsetLeft;s.scrollLeft=scrollLeft-(x-startX)*1.5;});
-    window.scrollTesti=function(dir){s.scrollBy({left:dir*cardW,behavior:'smooth'});};
-  })();
-  </script>
-  <br>
-  <a href="#final-cta" class="cta-big" style="max-width:600px;margin:28px auto 0;">🎨 I Want to Feel This Too — Only ₹99<small>Reserve Your Seat · 12th July 2026</small></a>
 </section>
 
 <div class="paint-divider"></div>
