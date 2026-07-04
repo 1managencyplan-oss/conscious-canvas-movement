@@ -102,6 +102,19 @@
     .wyg-bonus-bar { display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin-bottom:40px; }
     .wyg-bonus-pill { display:flex; align-items:center; gap:8px; background:rgba(240,192,64,0.12); border:1.5px solid rgba(240,192,64,0.35); color:#F0C040; font-size:13px; font-weight:700; padding:10px 20px; border-radius:30px; }
 
+    /* MINI PHOTO TESTIMONIALS */
+    .mini-testi-wrap { background:var(--cream); padding:36px 20px; }
+    .mini-testi-label { text-align:center; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--terra); margin-bottom:20px; }
+    .mini-testi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; max-width:1100px; margin:0 auto; }
+    .mini-testi-card { display:flex; align-items:center; gap:12px; background:#fff; border-radius:12px; padding:14px; box-shadow:0 3px 12px rgba(0,0,0,.07); border:1px solid rgba(196,112,74,0.12); }
+    .mini-testi-card img { width:60px; height:60px; border-radius:50%; object-fit:cover; object-position:center top; flex-shrink:0; border:2px solid rgba(196,112,74,0.3); }
+    .mini-testi-body { flex:1; }
+    .mini-stars { color:#F0C040; font-size:11px; margin-bottom:4px; }
+    .mini-testi-body p { font-size:12px; color:var(--text); font-style:italic; line-height:1.5; margin-bottom:4px; }
+    .mini-testi-body span { font-size:11px; color:var(--muted); font-weight:600; }
+    @media(max-width:800px){ .mini-testi-row{grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:480px){ .mini-testi-row{grid-template-columns:1fr;} }
+
     /* PAIN SECTION */
     .pain { background: var(--tile), linear-gradient(135deg,#4a0808,#6B1010); background-size:60px 60px,cover; padding:72px 20px; position:relative; overflow:hidden; }
     .pain::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 70% 30%,rgba(212,168,67,0.1) 0%,transparent 55%); pointer-events:none; }
@@ -577,6 +590,47 @@
   items.forEach(function(el,i){ el.style.animationDelay=(i*0.12)+'s'; obs.observe(el); });
 })();
 </script>
+
+<div class="paint-divider"></div>
+
+<!-- MINI PHOTO TESTIMONIALS -->
+<div class="mini-testi-wrap">
+  <p class="mini-testi-label">What our participants experienced ↓</p>
+  <div class="mini-testi-row">
+    <div class="mini-testi-card">
+      <img src="assets/testi-1.jpg" alt="Testimonial"/>
+      <div class="mini-testi-body">
+        <div class="mini-stars">★★★★★</div>
+        <p>"I feel emotionally lighter and more connected to myself."</p>
+        <span>Workshop Participant · Mumbai</span>
+      </div>
+    </div>
+    <div class="mini-testi-card">
+      <img src="assets/testi-2.jpg" alt="Testimonial"/>
+      <div class="mini-testi-body">
+        <div class="mini-stars">★★★★★</div>
+        <p>"A safe space to feel without being judged."</p>
+        <span>Housewife · Mumbai</span>
+      </div>
+    </div>
+    <div class="mini-testi-card">
+      <img src="assets/testi-3.jpg" alt="Testimonial"/>
+      <div class="mini-testi-body">
+        <div class="mini-stars">★★★★★</div>
+        <p>"I discovered parts of myself I had forgotten."</p>
+        <span>Working Professional · Mumbai</span>
+      </div>
+    </div>
+    <div class="mini-testi-card">
+      <img src="assets/testi-4.jpg" alt="Testimonial"/>
+      <div class="mini-testi-body">
+        <div class="mini-stars">★★★★★</div>
+        <p>"Never got a chance to think about myself so deeply."</p>
+        <span>Homemaker · Mumbai</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="paint-divider"></div>
 
