@@ -43,8 +43,8 @@
     .hero-video-wrap { max-width:806px; margin:0 auto; border-radius:16px; padding:3px; background:linear-gradient(135deg,#F0C040 0%,#C4704A 35%,#F0C040 65%,#b8860b 100%); box-shadow:0 0 40px rgba(240,192,64,0.3), 0 25px 60px rgba(0,0,0,0.7); }
     .hero-video-inner { border-radius:13px; overflow:hidden; background:#100800; }
     .hero-video-wrap iframe { display:block; width:100%; aspect-ratio:16/9; border:none; }
-    .video-placeholder { aspect-ratio:16/9; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; background:linear-gradient(135deg,#2a0505,#5a0e0e); cursor:pointer; position:relative; overflow:hidden; }
-    .video-placeholder::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center,rgba(240,192,64,0.06) 0%,transparent 70%); }
+    .video-placeholder { aspect-ratio:16/9; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; background:url('https://img.youtube.com/vi/dt13_yk5oiY/maxresdefault.jpg') center/cover no-repeat, linear-gradient(135deg,#2a0505,#5a0e0e); cursor:pointer; position:relative; overflow:hidden; }
+    .video-placeholder::before { content:''; position:absolute; inset:0; background:rgba(0,0,0,0.35); }
     .play-btn { width:72px; height:72px; background:rgba(196,112,74,0.9); border-radius:50%; display:flex; align-items:center; justify-content:center; position:relative; z-index:1; transition:transform .2s; }
     .play-btn:hover { transform:scale(1.1); }
     .play-btn svg { width:28px; height:28px; fill:#fff; margin-left:4px; }
