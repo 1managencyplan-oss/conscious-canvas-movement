@@ -1150,6 +1150,9 @@
 (function(){
   var CHECKOUT     = 'https://learn.consciouscreatorshouse.com/web/checkout/6a5621507bb173da77e6e3c4'; // ₹99 workshop only
   var CHECKOUT_REC = 'https://learn.consciouscreatorshouse.com/web/checkout/6a5680f792df9bc5080f3ffd'; // ₹199 workshop + recording
+  var WEBHOOK = 'https://connect.pabbly.com/webhook-listener/webhook/IjU3NjMwNTZkMDYzNDA0MzQ1MjZmNTUzYyI_3D_pc/IjU3NjcwNTY5MDYzMDA0Mzc1MjY0NTUzNDUxMzYi_pc';
+  var WORKSHOP_DATE = 'Sunday, 26th July 2026';
+  var WORKSHOP_TIME = '12:00 PM – 2:00 PM IST';
   var overlay = document.getElementById('leadOverlay');
   var form = document.getElementById('leadForm');
   var errBox = document.getElementById('leadErr');
@@ -1180,6 +1183,32 @@
     if(!name){ errBox.textContent='Please enter your name.'; return; }
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ errBox.textContent='Please enter a valid email.'; return; }
     if(phone10.length !== 10){ errBox.textContent='Please enter a valid 10-digit phone number.'; return; }
+
+    var code = document.getElementById('leadCode').value;      // e.g. +91
+    var fullPhone = code + phone10;                             // country code + number, no space
+    var now = new Date();
+    var dateIST = now.toLocaleDateString('en-GB', { timeZone:'Asia/Kolkata' });                                    // dd/mm/yyyy
+    var timeIST = now.toLocaleTimeString('en-US', { timeZone:'Asia/Kolkata', hour:'2-digit', minute:'2-digit', hour12:true });
+
+    var payload = {
+      name: name,
+      email: email,
+      phone: fullPhone,
+      country_code: code,
+      recording: recBox.checked ? 'Yes' : 'No',
+      submission_date_ist: dateIST,
+      submission_time_ist: timeIST,
+      workshop_date: WORKSHOP_DATE,
+      workshop_time: WORKSHOP_TIME,
+      source_url: window.location.href
+    };
+    // flatten any URL params (utm_source, etc.) onto the payload for ad tracking
+    new URLSearchParams(window.location.search).forEach(function(v,k){ if(!(k in payload)) payload[k]=v; });
+
+    // fire to Pabbly; keepalive lets it complete even after we navigate away
+    try {
+      fetch(WEBHOOK, { method:'POST', mode:'no-cors', keepalive:true, headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    } catch(err) {}
 
     var url = (recBox.checked ? CHECKOUT_REC : CHECKOUT)
       + '?name=' + encodeURIComponent(name)
