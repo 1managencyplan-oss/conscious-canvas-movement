@@ -354,6 +354,13 @@
     .lead-phone-row { display:flex; gap:8px; }
     .lead-phone-row select { flex:0 0 92px; padding:13px 8px; border-radius:9px; border:1.5px solid rgba(240,192,64,0.4); background:rgba(255,255,255,0.95); color:#2A1A0A; font-size:14px; font-family:inherit; }
     .lead-phone-row input { flex:1; }
+    .lead-addon { display:flex; align-items:flex-start; gap:10px; background:rgba(240,192,64,0.1); border:1.5px solid rgba(240,192,64,0.4); border-radius:10px; padding:12px 14px; margin-bottom:14px; cursor:pointer; transition:border-color .15s, background .15s; }
+    .lead-addon:has(input:checked) { border-color:#F0C040; background:rgba(240,192,64,0.2); }
+    .lead-addon input { width:18px; height:18px; margin-top:2px; accent-color:#F0C040; cursor:pointer; flex-shrink:0; }
+    .lead-addon-text { display:flex; flex-direction:column; gap:2px; }
+    .lead-addon-text strong { font-size:14px; color:#fff; }
+    .lead-addon-text small { font-size:12px; color:rgba(255,255,255,0.7); }
+    .lead-addon-text small b { color:#F0C040; }
     .lead-submit { width:100%; background:linear-gradient(90deg,#D4A843,#F0C040,#D4A843); color:#3D0A0A; font-size:18px; font-weight:900; padding:16px; border:none; border-radius:11px; cursor:pointer; margin-top:6px; box-shadow:0 8px 28px rgba(212,168,67,0.45); transition:transform .15s; font-family:inherit; }
     .lead-submit:hover { transform:translateY(-2px); }
     .lead-submit .orig-price { text-decoration:line-through; opacity:0.55; font-weight:400; font-size:14px; margin-right:5px; }
@@ -1097,7 +1104,7 @@
     <h3>Reserve Your <em>Seat</em></h3>
     <p class="lead-sub">Fill in your details to join the live workshop on <strong>Sun, 26th July · 12 PM–2 PM IST</strong></p>
     <ul class="lead-perks">
-      <li>🎥 Full session recording included</li>
+      <li>🎨 Live 2-hour art therapy workshop</li>
       <li>🎁 Special price — <s>₹2,999</s> just ₹99</li>
       <li>💻 Live online via Zoom</li>
     </ul>
@@ -1126,7 +1133,14 @@
           <input type="tel" id="leadPhone" name="phone" placeholder="10-digit number" autocomplete="tel" required/>
         </div>
       </div>
-      <button type="submit" class="lead-submit">🎨 Proceed to Checkout — <span class="orig-price">₹2,999</span> ₹99</button>
+      <label class="lead-addon" for="leadRec">
+        <input type="checkbox" id="leadRec"/>
+        <span class="lead-addon-text">
+          <strong>🎥 Add lifetime recording access</strong>
+          <small>Rewatch the full session anytime · <b>+₹100</b></small>
+        </span>
+      </label>
+      <button type="submit" class="lead-submit">🎨 Proceed to Checkout — <span class="orig-price">₹2,999</span> ₹<span id="leadPrice">99</span></button>
       <div class="lead-err" id="leadErr"></div>
       <div class="lead-secure">🔒 Secure checkout via TagMango</div>
     </form>
@@ -1134,10 +1148,16 @@
 </div>
 <script>
 (function(){
-  var CHECKOUT = 'https://learn.consciouscreatorshouse.com/web/checkout/6a5621507bb173da77e6e3c4';
+  var CHECKOUT     = 'https://learn.consciouscreatorshouse.com/web/checkout/6a5621507bb173da77e6e3c4'; // ₹99 workshop only
+  var CHECKOUT_REC = 'https://learn.consciouscreatorshouse.com/web/checkout/6a5680f792df9bc5080f3ffd'; // ₹199 workshop + recording
   var overlay = document.getElementById('leadOverlay');
   var form = document.getElementById('leadForm');
   var errBox = document.getElementById('leadErr');
+  var recBox = document.getElementById('leadRec');
+  var priceEl = document.getElementById('leadPrice');
+
+  // Toggle displayed price when recording add-on is selected
+  recBox.addEventListener('change', function(){ priceEl.textContent = recBox.checked ? '199' : '99'; });
 
   function openModal(e){ if(e) e.preventDefault(); overlay.classList.add('open'); document.body.style.overflow='hidden'; setTimeout(function(){ document.getElementById('leadName').focus(); },100); }
   function closeModal(){ overlay.classList.remove('open'); document.body.style.overflow=''; errBox.textContent=''; }
@@ -1161,7 +1181,7 @@
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ errBox.textContent='Please enter a valid email.'; return; }
     if(phone10.length !== 10){ errBox.textContent='Please enter a valid 10-digit phone number.'; return; }
 
-    var url = CHECKOUT
+    var url = (recBox.checked ? CHECKOUT_REC : CHECKOUT)
       + '?name=' + encodeURIComponent(name)
       + '&email=' + encodeURIComponent(email)
       + '&phone=' + encodeURIComponent(phone10)
