@@ -351,6 +351,12 @@
     /* FOOTER */
     footer { background:#100800; color:rgba(255,255,255,.5); text-align:center; padding:28px 20px; font-size:13px; line-height:2; }
     footer strong { color:rgba(255,255,255,.8); }
+    /* FOOTER links + copyright (compliance) */
+    footer .footer-links { display:flex; flex-wrap:wrap; justify-content:center; margin:0 auto 16px; max-width:760px; }
+    footer .footer-links a { color:rgba(255,255,255,.72); text-decoration:none; font-size:13px; padding:2px 14px; border-right:1px solid rgba(255,255,255,.22); line-height:1.5; }
+    footer .footer-links a:last-child { border-right:none; }
+    footer .footer-links a:hover { color:#F0C040; }
+    footer .copyright { margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,.12); color:rgba(255,255,255,.6); font-size:13px; }
     /* LEAD MODAL */
     .lead-overlay { position:fixed; inset:0; background:rgba(20,3,5,0.82); backdrop-filter:blur(4px); z-index:1000; display:none; align-items:center; justify-content:center; padding:20px; overflow-y:auto; }
     .lead-overlay.open { display:flex; }
@@ -1100,11 +1106,19 @@
   <p class="final-scarcity">⚡ Limited seats · Workshop on 2nd August 2026 · Fills up fast</p>
 </section>
 
-<!-- FOOTER -->
+<!-- FOOTER (compliance: legal links + copyright) -->
 <footer>
+  <nav class="footer-links" aria-label="Legal and information">
+    <a href="about-us.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+    <a href="refund-policy.html">Refund Policy</a>
+  </nav>
   <strong>Conscious Canvas Movement</strong> &nbsp;·&nbsp; Mumbai, India<br>
-  Instagram: @shrutigoenka_art &nbsp;·&nbsp; Email: shrutigoenka.artcoach@gmail.com<br>
-  WhatsApp: +91 98731 20007
+  Instagram: @shrutigoenka_art &nbsp;·&nbsp; Email: shrutigoenka.artcoach@gmail.com &nbsp;·&nbsp; WhatsApp: +91 98731 20007
+  <div class="copyright">© Copyright Conscious Canvas Movement</div>
 </footer>
 
 <!-- STICKY BAR -->
