@@ -37,6 +37,12 @@
     a { text-decoration: none; color: inherit; }
 
     /* TOPBAR */
+    /* BRAND HEADER */
+    .brand-header { background: var(--cream); border-bottom: 1px solid rgba(184,92,56,0.18); text-align: center; padding: 14px 20px; }
+    .brand-header .brand-name { font-family: 'Playfair Display', serif; font-size: clamp(20px, 3vw, 28px); font-weight: 900; color: var(--terra); letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 10px; }
+    .brand-header .brand-name span.mark { font-size: 0.9em; }
+    .brand-header .brand-tag { display: block; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-top: 3px; }
+
     .topbar { background: #B85C38; color: #FAF6EF; border-bottom: 2px solid #D4795A; text-align: center; padding: 10px 20px; font-size: 14px; font-weight: 600; letter-spacing: 0.3px; position: sticky; top: 0; z-index: 100; }
 
     /* PAINT DIVIDER */
@@ -391,6 +397,12 @@
   </style>
 </head>
 <body>
+
+<!-- BRAND HEADER -->
+<header class="brand-header">
+  <div class="brand-name"><span class="mark">🎨</span>Conscious Canvas Movement</div>
+  <span class="brand-tag">Art Therapy with Shruti Goenka</span>
+</header>
 
 <!-- STICKY TOP BAR -->
 <div class="topbar">🎨 Limited Seats Available — Only ₹99 &nbsp;|&nbsp; Workshop on Sun, 9th August · Reserve before it fills up</div>
