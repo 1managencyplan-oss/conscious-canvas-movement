@@ -1267,13 +1267,6 @@
       fetch(WEBHOOK, { method:'POST', mode:'no-cors', keepalive:true, headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
     } catch(err) {}
 
-    // Meta Pixel — Lead event (form submitted successfully)
-    try {
-      if (typeof fbq === 'function') {
-        fbq('track', 'Lead');
-      }
-    } catch(err) {}
-
     // Meta Pixel — InitiateCheckout with the value of the checkout we're sending them to (99 or 199)
     try {
       if (typeof fbq === 'function') {
