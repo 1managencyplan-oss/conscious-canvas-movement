@@ -4,25 +4,26 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Conscious Canvas Movement — Art Therapy Workshop by Shruti Goenka</title>
-  <!-- Meta Pixel — Conscious Canvas Movement -->
+  <!-- Meta Pixel — deferred to avoid render-blocking -->
   <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window,document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1026482883438979');
-  fbq('track', 'PageView');
+  window._fbqQueue=[];window.fbq=function(){window._fbqQueue.push(arguments);};
+  window.addEventListener('load',function(){
+    !function(f,b,e,v,n,t,s){if(f.fbq&&f.fbq!==window.fbq)return;
+    n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=window._fbqQueue||[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);
+    }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','1026482883438979');fbq('track','PageView');
+  });
   </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1026482883438979&ev=PageView&noscript=1"/></noscript>
   <!-- End Meta Pixel -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/></noscript>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -491,7 +492,7 @@
   <div class="event-layout">
     <div class="event-photo-col">
       <div class="event-photo-frame">
-        <img src="assets/shruti-about.jpg" alt="Shruti Goenka"/>
+        <img src="assets/shruti-about.jpg" alt="Shruti Goenka" loading="lazy" decoding="async"/>
         <div class="event-photo-ring">
           <svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
             <circle cx="130" cy="130" r="122" fill="none" stroke="#B85C38" stroke-width="1.5" stroke-dasharray="6 5"/>
@@ -668,7 +669,7 @@
     </button>
     <div class="testi-scroller" id="testiScroller">
       <div class="testi-card">
-        <img class="testi-img" src="assets/testi-1.jpg" alt="Workshop participants holding heart paintings">
+        <img class="testi-img" src="assets/testi-1.jpg" alt="Workshop participants holding heart paintings" loading="lazy" decoding="async">
         <div class="testi-body">
           <div class="testi-stars">★★★★★</div>
           <p class="testi-quote">"I feel emotionally lighter, calmer, and more connected to myself. I didn't expect one session to do so much."</p>
@@ -677,7 +678,7 @@
         </div>
       </div>
       <div class="testi-card">
-        <img class="testi-img" src="assets/testi-2.jpg" alt="Group of women holding their artwork">
+        <img class="testi-img" src="assets/testi-2.jpg" alt="Group of women holding their artwork" loading="lazy" decoding="async">
         <div class="testi-body">
           <div class="testi-stars">★★★★★</div>
           <p class="testi-quote">"This program gave me a safe space to feel without being judged. I've been carrying so much — and for the first time, I let it go."</p>
@@ -686,7 +687,7 @@
         </div>
       </div>
       <div class="testi-card">
-        <img class="testi-img" src="assets/testi-3.jpg" alt="Young participants with mandala artwork">
+        <img class="testi-img" src="assets/testi-3.jpg" alt="Young participants with mandala artwork" loading="lazy" decoding="async">
         <div class="testi-body">
           <div class="testi-stars">★★★★★</div>
           <p class="testi-quote">"I discovered parts of myself I had forgotten. The activities were so engaging I completely lost track of time."</p>
@@ -695,7 +696,7 @@
         </div>
       </div>
       <div class="testi-card">
-        <img class="testi-img" src="assets/testi-4.jpg" alt="Shruti with participant receiving certificate">
+        <img class="testi-img" src="assets/testi-4.jpg" alt="Shruti with participant receiving certificate" loading="lazy" decoding="async">
         <div class="testi-body">
           <div class="testi-stars">★★★★★</div>
           <p class="testi-quote">"I never got a chance to think about myself so deeply. It was a very different feeling — I felt nostalgic touching colors again."</p>
@@ -894,7 +895,7 @@
 
     <div class="vcard" onclick="playVCard(this)">
       <div class="vcard-inner">
-        <video src="assets/testi-vid-1.mp4" playsinline preload="metadata" loop muted></video>
+        <video src="assets/testi-vid-1.mp4" playsinline preload="none" loop muted></video>
         <div class="vcard-overlay">
           <div class="vcard-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="vcard-label">
@@ -908,7 +909,7 @@
 
     <div class="vcard" onclick="playVCard(this)">
       <div class="vcard-inner">
-        <video src="assets/testi-vid-2.mp4" playsinline preload="metadata" loop muted></video>
+        <video src="assets/testi-vid-2.mp4" playsinline preload="none" loop muted></video>
         <div class="vcard-overlay">
           <div class="vcard-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="vcard-label">
@@ -922,7 +923,7 @@
 
     <div class="vcard" onclick="playVCard(this)">
       <div class="vcard-inner">
-        <video src="assets/testi-vid-3.mp4" playsinline preload="metadata" loop muted></video>
+        <video src="assets/testi-vid-3.mp4" playsinline preload="none" loop muted></video>
         <div class="vcard-overlay">
           <div class="vcard-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="vcard-label">
@@ -936,7 +937,7 @@
 
     <div class="vcard" onclick="playVCard(this)">
       <div class="vcard-inner">
-        <video src="assets/testi-vid-4.mp4" playsinline preload="metadata" loop muted></video>
+        <video src="assets/testi-vid-4.mp4" playsinline preload="none" loop muted></video>
         <div class="vcard-overlay">
           <div class="vcard-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="vcard-label">
@@ -950,7 +951,7 @@
 
     <div class="vcard" onclick="playVCard(this)">
       <div class="vcard-inner">
-        <video src="assets/testi-vid-5.mp4" playsinline preload="metadata" loop muted></video>
+        <video src="assets/testi-vid-5.mp4" playsinline preload="none" loop muted></video>
         <div class="vcard-overlay">
           <div class="vcard-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="vcard-label">
@@ -964,7 +965,7 @@
 
     <div class="vcard" onclick="playVCard(this)">
       <div class="vcard-inner">
-        <video src="assets/testi-vid-6.mp4" playsinline preload="metadata" loop muted></video>
+        <video src="assets/testi-vid-6.mp4" playsinline preload="none" loop muted></video>
         <div class="vcard-overlay">
           <div class="vcard-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="vcard-label">
@@ -1044,7 +1045,7 @@
   <div class="about-inner">
     <div class="about-photo-col">
       <div class="about-frame">
-        <img src="assets/shruti-photo.jpg" alt="Shruti Goenka"/>
+        <img src="assets/shruti-photo.jpg" alt="Shruti Goenka" loading="lazy" decoding="async"/>
         <div class="about-frame-ring">
           <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
             <circle cx="150" cy="150" r="140" fill="none" stroke="#B85C38" stroke-width="1.5" stroke-dasharray="8 6"/>
