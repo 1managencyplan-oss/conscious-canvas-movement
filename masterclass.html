@@ -4,25 +4,27 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Conscious Canvas Movement — Art Therapy Workshop by Shruti Goenka</title>
-  <!-- Meta Pixel — Conscious Canvas Movement -->
+  <!-- Meta Pixel — deferred to avoid render-blocking -->
   <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window,document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1026482883438979');
-  fbq('track', 'PageView');
+  window._fbqQueue=[];window.fbq=function(){window._fbqQueue.push(arguments);};
+  window.addEventListener('load',function(){
+    !function(f,b,e,v,n,t,s){if(f.fbq&&f.fbq!==window.fbq)return;
+    n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=window._fbqQueue||[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);
+    }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','1026482883438979');fbq('track','PageView');
+  });
   </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1026482883438979&ev=PageView&noscript=1"/></noscript>
   <!-- End Meta Pixel -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/></noscript>
+  <link rel="preload" href="https://img.youtube.com/vi/dt13_yk5oiY/maxresdefault.jpg" as="image" fetchpriority="high"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -65,8 +67,9 @@
     .hero-video-wrap { max-width:806px; margin:0 auto; border-radius:16px; padding:3px; background:linear-gradient(135deg,#B85C38 0%,#C4704A 35%,#B85C38 65%,#b8860b 100%); box-shadow:0 0 40px rgba(184,92,56,0.3), 0 25px 60px rgba(0,0,0,0.7); }
     .hero-video-inner { border-radius:13px; overflow:hidden; background:#100800; }
     .hero-video-wrap iframe { display:block; width:100%; aspect-ratio:16/9; border:none; }
-    .video-placeholder { aspect-ratio:16/9; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; background:url('https://img.youtube.com/vi/dt13_yk5oiY/maxresdefault.jpg') center/cover no-repeat, linear-gradient(135deg,#2a0505,#5a0e0e); cursor:pointer; position:relative; overflow:hidden; }
-    .video-placeholder::before { content:''; position:absolute; inset:0; background:rgba(0,0,0,0.35); }
+    .video-placeholder { aspect-ratio:16/9; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; background:linear-gradient(135deg,#2a0505,#5a0e0e); cursor:pointer; position:relative; overflow:hidden; }
+    .video-placeholder img.vp-thumb { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+    .video-placeholder::before { content:''; position:absolute; inset:0; background:rgba(0,0,0,0.35); z-index:1; }
     .play-btn { width:72px; height:72px; background:rgba(196,112,74,0.9); border-radius:50%; display:flex; align-items:center; justify-content:center; position:relative; z-index:1; transition:transform .2s; }
     .play-btn:hover { transform:scale(1.1); }
     .play-btn svg { width:28px; height:28px; fill:#fff; margin-left:4px; }
@@ -405,7 +408,7 @@
 </header>
 
 <!-- STICKY TOP BAR -->
-<div class="topbar">🎨 FREE Live Masterclass &nbsp;|&nbsp; Sun, 6th September · Limited seats — register before it fills up</div>
+<div class="topbar">🎨 Limited Seats Available — Join FREE &nbsp;|&nbsp; Workshop on Sun, 6th September · Reserve before it fills up</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -472,8 +475,9 @@
   <div class="hero-video-wrap" id="heroVideoWrap">
     <div class="hero-video-inner">
       <div class="video-placeholder" onclick="loadVideo()">
-        <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <p>Watch: What is Conscious Canvas Movement?</p>
+        <img class="vp-thumb" src="https://img.youtube.com/vi/dt13_yk5oiY/maxresdefault.jpg" alt="Conscious Canvas Movement video" fetchpriority="high" decoding="async"/>
+        <div class="play-btn" style="position:relative;z-index:2;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <p style="position:relative;z-index:2;">Watch: What is Conscious Canvas Movement?</p>
       </div>
     </div>
   </div>
@@ -491,7 +495,7 @@
   <div class="event-layout">
     <div class="event-photo-col">
       <div class="event-photo-frame">
-        <img src="assets/shruti-about.jpg" alt="Shruti Goenka"/>
+        <img src="assets/shruti-about.jpg" alt="Shruti Goenka" loading="lazy" decoding="async"/>
         <div class="event-photo-ring">
           <svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
             <circle cx="130" cy="130" r="122" fill="none" stroke="#B85C38" stroke-width="1.5" stroke-dasharray="6 5"/>
@@ -554,7 +558,7 @@
         <div class="cd-box"><span class="cd-num" id="cd-mins">--</span><span class="cd-label">Minutes</span></div>
         <div class="cd-box"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">Seconds</span></div>
       </div>
-      <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="event-cta">Register Free for the Masterclass</a>
+      <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="event-cta">Join The Workshop — It's FREE 🎨</a>
     </div>
   </div>
 </div>
@@ -641,7 +645,7 @@
     </div>
   </div>
   <br>
-  <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:500px;margin:24px auto 0;">🎨 Register Free<small>Limited seats · Secure your spot now</small></a>
+  <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:500px;margin:24px auto 0;">🎨 Reserve My FREE Seat<small>Limited seats · Secure your spot now</small></a>
 </div>
 
 <script>
@@ -668,7 +672,7 @@
     </button>
     <div class="testi-scroller" id="testiScroller">
       <div class="testi-card">
-        <img class="testi-img" src="assets/testi-1.jpg" alt="Workshop participants holding heart paintings">
+        <img class="testi-img" src="assets/testi-1.jpg" alt="Workshop participants holding heart paintings" loading="lazy" decoding="async">
         <div class="testi-body">
           <div class="testi-stars">★★★★★</div>
           <p class="testi-quote">"I feel emotionally lighter, calmer, and more connected to myself. I didn't expect one session to do so much."</p>
@@ -677,7 +681,7 @@
         </div>
       </div>
       <div class="testi-card">
-        <img class="testi-img" src="assets/testi-2.jpg" alt="Group of women holding their artwork">
+        <img class="testi-img" src="assets/testi-2.jpg" alt="Group of women holding their artwork" loading="lazy" decoding="async">
         <div class="testi-body">
           <div class="testi-stars">★★★★★</div>
           <p class="testi-quote">"This program gave me a safe space to feel without being judged. I've been carrying so much — and for the first time, I let it go."</p>
@@ -686,7 +690,7 @@
         </div>
       </div>
       <div class="testi-card">
-        <img class="testi-img" src="assets/testi-3.jpg" alt="Young participants with mandala artwork">
+        <img class="testi-img" src="assets/testi-3.jpg" alt="Young participants with mandala artwork" loading="lazy" decoding="async">
         <div class="testi-body">
           <div class="testi-stars">★★★★★</div>
           <p class="testi-quote">"I discovered parts of myself I had forgotten. The activities were so engaging I completely lost track of time."</p>
@@ -695,7 +699,7 @@
         </div>
       </div>
       <div class="testi-card">
-        <img class="testi-img" src="assets/testi-4.jpg" alt="Shruti with participant receiving certificate">
+        <img class="testi-img" src="assets/testi-4.jpg" alt="Shruti with participant receiving certificate" loading="lazy" decoding="async">
         <div class="testi-body">
           <div class="testi-stars">★★★★★</div>
           <p class="testi-quote">"I never got a chance to think about myself so deeply. It was a very different feeling — I felt nostalgic touching colors again."</p>
@@ -726,7 +730,7 @@
   })();
   </script>
   <br>
-  <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:600px;margin:28px auto 0;">🎨 I Want to Feel This Too<small>Reserve Your Free Seat · 6th September 2026</small></a>
+  <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:600px;margin:28px auto 0;">🎨 I Want to Feel This Too — Join FREE<small>Reserve Your Seat · 6th September 2026</small></a>
 </section>
 
 <div class="paint-divider"></div>
@@ -744,7 +748,7 @@
         <li>Walk away with tools you'll actually use every single day</li>
         <li>Zero art skills required — the process is the healing</li>
       </ul>
-      <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:420px;">🎨 Reserve My Free Seat<small>Limited seats · Secure your spot now</small></a>
+      <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:420px;">🎨 Reserve My FREE Seat<small>Limited seats · Secure your spot now</small></a>
     </div>
     <div class="pain-visual">
       <div class="pain-card">
@@ -799,6 +803,30 @@
     </div>
   </div>
 
+  <h3 style="font-family:'Playfair Display',serif;font-size:26px;text-align:center;margin:40px 0 20px;color:var(--deep);">🎨 What You'll Create in This Workshop</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:900px;margin:0 auto 44px;">
+    <div style="background:#fff;border-radius:16px;padding:20px;text-align:center;box-shadow:0 4px 16px rgba(184,92,56,0.1);">
+      <div style="font-size:2rem;margin-bottom:8px;">🌀</div>
+      <strong style="color:var(--deep);">Mandala Art</strong>
+      <p style="font-size:0.85rem;color:var(--muted);margin-top:6px;">For stress release &amp; inner stillness</p>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:20px;text-align:center;box-shadow:0 4px 16px rgba(184,92,56,0.1);">
+      <div style="font-size:2rem;margin-bottom:8px;">🎨</div>
+      <strong style="color:var(--deep);">Emotion Color Map</strong>
+      <p style="font-size:0.85rem;color:var(--muted);margin-top:6px;">Express feelings words can't capture</p>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:20px;text-align:center;box-shadow:0 4px 16px rgba(184,92,56,0.1);">
+      <div style="font-size:2rem;margin-bottom:8px;">🌸</div>
+      <strong style="color:var(--deep);">Gratitude Art Journal</strong>
+      <p style="font-size:0.85rem;color:var(--muted);margin-top:6px;">Turn gratitude into a visual ritual</p>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:20px;text-align:center;box-shadow:0 4px 16px rgba(184,92,56,0.1);">
+      <div style="font-size:2rem;margin-bottom:8px;">🖌️</div>
+      <strong style="color:var(--deep);">Abstract Expression</strong>
+      <p style="font-size:0.85rem;color:var(--muted);margin-top:6px;">Release what you've been holding inside</p>
+    </div>
+  </div>
+
   <h3 style="color:#fff;font-family:'Playfair Display',serif;font-size:22px;text-align:center;margin-bottom:28px;">What Happens Inside a Session</h3>
   <div class="exp-grid" style="max-width:960px;margin:0 auto 44px;">
     <div class="exp-card">
@@ -824,7 +852,7 @@
     </div>
   </div>
   <div style="text-align:center">
-    <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:500px;margin:0 auto;">🎨 Join LIVE for Free<small>Reserve Your Seat · 6th September 2026</small></a>
+    <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:500px;margin:0 auto;">🎨 Join LIVE for FREE<small>Reserve Your Seat · 6th September 2026</small></a>
   </div>
 </section>
 
@@ -840,20 +868,24 @@
       <span class="bonus-icon">📓</span>
       <h3>Emotional Wellness Workbook</h3>
       <p>Reflection worksheets, emotional check-in pages, journaling prompts, and activity templates from every module. Yours to keep forever.</p>
+      <p style="margin-top:12px;font-weight:700;color:var(--terra);">Worth ₹1,500</p>
     </div>
     <div class="bonus-card">
       <div class="bonus-tag">BONUS 2</div>
       <span class="bonus-icon">📅</span>
       <h3>30-Day Mood Tracker</h3>
       <p>A beautifully designed printable tracker to monitor your emotions daily, identify patterns, and build lasting self-awareness.</p>
+      <p style="margin-top:12px;font-weight:700;color:var(--terra);">Worth ₹999</p>
     </div>
     <div class="bonus-card">
       <div class="bonus-tag">BONUS 3</div>
       <span class="bonus-icon">🌀</span>
       <h3>Mandala Template Collection</h3>
       <p>Printable mandala designs for stress relief, focus, and mindfulness practice — use them whenever you need to slow down and breathe.</p>
+      <p style="margin-top:12px;font-weight:700;color:var(--terra);">Worth ₹1,499</p>
     </div>
   </div>
+  <p style="text-align:center;margin-top:32px;font-size:1.1rem;color:var(--muted);">🎁 Total Bonus Value — <s>₹3,998</s> &nbsp;<strong style="color:var(--terra);">Yours FREE</strong> when you attend LIVE</p>
 </section>
 
 <div class="paint-divider"></div>
@@ -866,7 +898,7 @@
 
     <div class="vcard" onclick="playVCard(this)">
       <div class="vcard-inner">
-        <video src="assets/testi-vid-1.mp4" playsinline preload="metadata" loop muted></video>
+        <video src="assets/testi-vid-1.mp4" playsinline preload="none" loop muted></video>
         <div class="vcard-overlay">
           <div class="vcard-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="vcard-label">
@@ -880,7 +912,7 @@
 
     <div class="vcard" onclick="playVCard(this)">
       <div class="vcard-inner">
-        <video src="assets/testi-vid-2.mp4" playsinline preload="metadata" loop muted></video>
+        <video src="assets/testi-vid-2.mp4" playsinline preload="none" loop muted></video>
         <div class="vcard-overlay">
           <div class="vcard-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="vcard-label">
@@ -894,7 +926,7 @@
 
     <div class="vcard" onclick="playVCard(this)">
       <div class="vcard-inner">
-        <video src="assets/testi-vid-3.mp4" playsinline preload="metadata" loop muted></video>
+        <video src="assets/testi-vid-3.mp4" playsinline preload="none" loop muted></video>
         <div class="vcard-overlay">
           <div class="vcard-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="vcard-label">
@@ -908,7 +940,7 @@
 
     <div class="vcard" onclick="playVCard(this)">
       <div class="vcard-inner">
-        <video src="assets/testi-vid-4.mp4" playsinline preload="metadata" loop muted></video>
+        <video src="assets/testi-vid-4.mp4" playsinline preload="none" loop muted></video>
         <div class="vcard-overlay">
           <div class="vcard-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="vcard-label">
@@ -922,7 +954,7 @@
 
     <div class="vcard" onclick="playVCard(this)">
       <div class="vcard-inner">
-        <video src="assets/testi-vid-5.mp4" playsinline preload="metadata" loop muted></video>
+        <video src="assets/testi-vid-5.mp4" playsinline preload="none" loop muted></video>
         <div class="vcard-overlay">
           <div class="vcard-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="vcard-label">
@@ -936,7 +968,7 @@
 
     <div class="vcard" onclick="playVCard(this)">
       <div class="vcard-inner">
-        <video src="assets/testi-vid-6.mp4" playsinline preload="metadata" loop muted></video>
+        <video src="assets/testi-vid-6.mp4" playsinline preload="none" loop muted></video>
         <div class="vcard-overlay">
           <div class="vcard-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="vcard-label">
@@ -972,7 +1004,7 @@
     };
   })();
   </script>
-  <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:560px;margin:0 auto;">🎨 Join Them — Reserve Free<small>6th September 2026 · Limited seats</small></a>
+  <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:560px;margin:0 auto;">🎨 Join Them — Reserve FREE<small>6th September 2026 · Limited seats</small></a>
 </section>
 
 <div class="paint-divider"></div>
@@ -1005,7 +1037,7 @@
       </div>
     </div>
     <br>
-    <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:500px;margin:28px auto 0;">🎨 I Choose Conscious Canvas — Register Free</a>
+    <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:500px;margin:28px auto 0;">🎨 I Choose Conscious Canvas — Join FREE</a>
   </div>
 </section>
 
@@ -1016,7 +1048,7 @@
   <div class="about-inner">
     <div class="about-photo-col">
       <div class="about-frame">
-        <img src="assets/shruti-photo.jpg" alt="Shruti Goenka"/>
+        <img src="assets/shruti-photo.jpg" alt="Shruti Goenka" loading="lazy" decoding="async"/>
         <div class="about-frame-ring">
           <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
             <circle cx="150" cy="150" r="140" fill="none" stroke="#B85C38" stroke-width="1.5" stroke-dasharray="8 6"/>
@@ -1059,12 +1091,12 @@
   <h2>Why You Cannot Miss This</h2>
   <p class="outcomes-sub">One session. Real transformation. Tools you'll carry for life.</p>
   <div class="outcomes-grid">
-    <div class="outcome-card"><span class="outcome-icon">💰</span><h3>Investment</h3><p>Free</p></div>
+    <div class="outcome-card"><span class="outcome-icon">🎁</span><h3>Investment</h3><p>100% FREE</p></div>
     <div class="outcome-card"><span class="outcome-icon">📍</span><h3>Format</h3><p>Live Online (Zoom)</p></div>
     <div class="outcome-card"><span class="outcome-icon">👥</span><h3>Seats</h3><p>Limited — Small intimate group</p></div>
     <div class="outcome-card"><span class="outcome-icon">🎁</span><h3>Bonuses</h3><p>3 exclusive resources included</p></div>
   </div>
-  <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:560px;margin:0 auto;">🎨 Reserve My Free Seat<small>Limited seats — fills up fast</small></a>
+  <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="cta-big" style="max-width:560px;margin:0 auto;">🎨 Reserve My FREE Seat<small>Limited seats — fills up fast</small></a>
 </section>
 
 <div class="paint-divider"></div>
@@ -1107,13 +1139,13 @@
   <h2>Join Conscious Canvas Movement — <em>LIVE</em></h2>
   <p>Take the first step towards yourself. One session can change how you feel — about yourself, your emotions, and your life.</p>
   <div class="final-cta-box">
-    <div class="final-detail"><span>✅</span><span>Free to attend · Limited seats — fills up fast!</span></div>
+    <div class="final-detail"><span>🎁</span><span>100% FREE · Limited seats — fills up fast!</span></div>
     <div class="final-detail"><span>📅</span><span>6th September 2026</span></div>
     <div class="final-detail"><span>🕑</span><span>12 PM – 2 PM IST</span></div>
     <div class="final-detail"><span>💻</span><span>Online via Zoom</span></div>
   </div>
   <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="final-cta-btn">
-    🎨 Register Free — Save My Seat
+    🎨 Reserve My FREE Seat Now
   </a>
   <p class="final-scarcity">⚡ Limited seats · Workshop on 6th September 2026 · Fills up fast</p>
 </section>
@@ -1134,139 +1166,11 @@
 
 <!-- STICKY BAR -->
 <div class="sticky-bar">
-  <div class="sticky-bar-text">Limited seats! &nbsp;<strong>FREE Masterclass</strong></div>
-  <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="sticky-btn">🎨 Register Free</a>
+  <div class="sticky-bar-text">Limited seats! &nbsp;<strong style="color:#B85C38;">100% FREE</strong></div>
+  <a href="https://learn.consciouscreatorshouse.com/l/d7c9ad82c6" class="sticky-btn">🎨 Reserve FREE Seat</a>
 </div>
 
-<!-- LEAD MODAL -->
-<div class="lead-overlay" id="leadOverlay" role="dialog" aria-modal="true">
-  <div class="lead-modal">
-    <button class="lead-close" id="leadClose" aria-label="Close">&times;</button>
-    <h3>Reserve Your <em>Seat</em></h3>
-    <p class="lead-sub">Fill in your details to join the live workshop on <strong>Sun, 6th September · 12 PM–2 PM IST</strong></p>
-    <ul class="lead-perks">
-      <li>🎨 Live 2-hour art therapy workshop</li>
-      <li>🎁 100% free to attend</li>
-      <li>💻 Live online via Zoom</li>
-    </ul>
-    <form id="leadForm" novalidate>
-      <div class="lead-field">
-        <label for="leadName">Full Name</label>
-        <input type="text" id="leadName" name="name" placeholder="Your name" autocomplete="name" required/>
-      </div>
-      <div class="lead-field">
-        <label for="leadEmail">Email Address</label>
-        <input type="email" id="leadEmail" name="email" placeholder="you@email.com" autocomplete="email" required/>
-      </div>
-      <div class="lead-field">
-        <label for="leadPhone">WhatsApp Number</label>
-        <div class="lead-phone-row">
-          <select id="leadCode" aria-label="Country code">
-            <option value="+91" selected>🇮🇳 +91</option>
-            <option value="+1">🇺🇸 +1</option>
-            <option value="+44">🇬🇧 +44</option>
-            <option value="+61">🇦🇺 +61</option>
-            <option value="+65">🇸🇬 +65</option>
-            <option value="+971">🇦🇪 +971</option>
-            <option value="+60">🇲🇾 +60</option>
-            <option value="+64">🇳🇿 +64</option>
-          </select>
-          <input type="tel" id="leadPhone" name="phone" placeholder="10-digit number" autocomplete="tel" required/>
-        </div>
-      </div>
-      <button type="submit" class="lead-submit">🎨 Confirm My Free Seat</button>
-      <div class="lead-err" id="leadErr"></div>
-      <div class="lead-secure">🔒 Free registration · No payment required</div>
-    </form>
-  </div>
-</div>
-<script>
-(function(){
-  var WEBHOOK = 'https://connect.pabbly.com/webhook-listener/webhook/IjU3NjMwNTZkMDYzNDA0MzQ1MjZmNTUzYyI_3D_pc/IjU3NjcwNTY5MDYzMDA0Mzc1MjY0NTUzNDUxMzYi_pc';
-  var WORKSHOP_DATE = 'Sunday, 6th September 2026';
-  var WORKSHOP_TIME = '12:00 PM – 2:00 PM IST';
-  var overlay = document.getElementById('leadOverlay');
-  var form = document.getElementById('leadForm');
-  var errBox = document.getElementById('leadErr');
-
-  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-  function openModal(e){ if(e) e.preventDefault(); overlay.classList.add('open'); document.body.style.overflow='hidden'; setTimeout(function(){ var n=document.getElementById('leadName'); if(n) n.focus(); },100); }
-  function closeModal(){ overlay.classList.remove('open'); document.body.style.overflow=''; if(errBox) errBox.textContent=''; }
-
-  // CTAs link directly to the TagMango registration page — the in-page modal is disabled.
-  // (Fire a Lead pixel on click before sending the visitor to TagMango.)
-  var ctaSelectors = '.cta-big, .event-cta, .final-cta-btn, .sticky-btn';
-  document.querySelectorAll(ctaSelectors).forEach(function(btn){
-    btn.addEventListener('click', function(){
-      try { if (typeof fbq === 'function') { fbq('track', 'Lead'); } } catch(err) {}
-    });
-  });
-
-  document.getElementById('leadClose').addEventListener('click', closeModal);
-  overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(); });
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && overlay.classList.contains('open')) closeModal(); });
-
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var name = document.getElementById('leadName').value.trim();
-    var email = document.getElementById('leadEmail').value.trim();
-    var phoneRaw = document.getElementById('leadPhone').value.replace(/\D/g,'');
-    var phone10 = phoneRaw.slice(-10);
-
-    if(!name){ errBox.textContent='Please enter your name.'; return; }
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ errBox.textContent='Please enter a valid email.'; return; }
-    if(phone10.length !== 10){ errBox.textContent='Please enter a valid 10-digit phone number.'; return; }
-
-    var code = document.getElementById('leadCode').value;      // e.g. +91
-    var fullPhone = code + phone10;                             // country code + number, no space
-    var now = new Date();
-    var dateIST = now.toLocaleDateString('en-GB', { timeZone:'Asia/Kolkata' });                                    // dd/mm/yyyy
-    var timeIST = now.toLocaleTimeString('en-US', { timeZone:'Asia/Kolkata', hour:'2-digit', minute:'2-digit', hour12:true });
-
-    var payload = {
-      name: name,
-      email: email,
-      phone: fullPhone,
-      country_code: code,
-      registration_type: 'Free Masterclass',
-      submission_date_ist: dateIST,
-      submission_time_ist: timeIST,
-      workshop_date: WORKSHOP_DATE,
-      workshop_time: WORKSHOP_TIME,
-      source_url: window.location.href
-    };
-    // flatten any URL params (utm_source, etc.) onto the payload for ad tracking
-    new URLSearchParams(window.location.search).forEach(function(v,k){ if(!(k in payload)) payload[k]=v; });
-
-    // fire the free registration to Pabbly
-    try {
-      fetch(WEBHOOK, { method:'POST', mode:'no-cors', keepalive:true, headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
-    } catch(err) {}
-
-    // Meta Pixel — Lead event (free registration completed)
-    try {
-      if (typeof fbq === 'function') {
-        fbq('track', 'Lead');
-      }
-    } catch(err) {}
-
-    // Free registration — show an on-page confirmation (no checkout redirect)
-    var modal = document.querySelector('.lead-modal');
-    if (modal) {
-      modal.innerHTML =
-        '<button class="lead-close" id="leadCloseDone" aria-label="Close">&times;</button>'
-        + '<h3>You’re <em>Registered!</em></h3>'
-        + '<p class="lead-sub">Thank you, ' + esc(name) + '! Your free seat for the live session on <strong>Sun, 6th September · 12 PM–2 PM IST</strong> is confirmed.</p>'
-        + '<ul class="lead-perks">'
-        + '<li>📧 Joining details are on their way to your email</li>'
-        + '<li>💬 We’ll also send them on WhatsApp</li>'
-        + '<li>🎨 See you live — no payment needed</li>'
-        + '</ul>';
-      var dc = document.getElementById('leadCloseDone');
-      if (dc) dc.addEventListener('click', closeModal);
-    }
-  });
-})();
-</script>
+<!-- Free funnel: CTAs link directly to the TagMango registration page.
+     Landing page fires PageView only; the Lead event fires on the TagMango thank-you page. -->
 </body>
 </html>
